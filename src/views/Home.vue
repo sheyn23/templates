@@ -18,6 +18,10 @@ export default {
         first: {
           title: 'TrHeader',
           src: '/trHeader'
+        },
+        second: {
+          title: 'Project red',
+          src: '/prRed'
         }
       }
     };

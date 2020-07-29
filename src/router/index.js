@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import TrHeader from '../views/TriangleHeader/index';
+import PrRed from '../views/PrRed/index';
 
 Vue.use(VueRouter);
 
@@ -13,8 +14,13 @@ const routes = [
   },
   {
     path: '/trHeader',
-    name: 'TrHeader',
+    name: 'TriangleHeader',
     component: TrHeader,
+  },
+  {
+    path: '/prRed',
+    name: 'ProjectRed',
+    component: PrRed,
   },
 ];
 
