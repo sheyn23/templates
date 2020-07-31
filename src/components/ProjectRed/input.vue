@@ -1,6 +1,8 @@
 <template>
   <div class="input">
+    <div class="input-left"></div>
     <input type="text" placeholder="asdasdasd">
+    <div class="input-right"></div>
   </div>
 </template>
 
@@ -17,7 +19,8 @@ export default {
     height: 30px;
     position: relative;
   }
-  .input::before, .input::after {
+
+  .input-left::before, .input-left::after {
     content: '';
     position: absolute;
     left: -35px;
@@ -25,10 +28,24 @@ export default {
     border: 16px solid transparent;
     border-right: 18px solid darkred;
   }
-  .input::after {
+  .input-left::after {
     border-right: 17px solid white;
     bottom: -1px;
     left: -33px;
+  }
+
+  .input-right::before, .input-right::after {
+    content: '';
+    position: absolute;
+    right: -35px;
+    bottom: -1px;
+    border: 16px solid transparent;
+    border-left: 18px solid darkred;
+  }
+  .input-right::after {
+    border-left: 17px solid white;
+    bottom: -1px;
+    right: -33px;
   }
 
   .input input {
