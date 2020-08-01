@@ -22,6 +22,10 @@ export default {
         second: {
           title: 'Project red',
           src: '/prRed'
+        },
+        thread: {
+          title: 'Social cube',
+          src: '/soCube'
         }
       }
     };

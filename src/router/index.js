@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import TrHeader from '../views/TriangleHeader/index';
 import PrRed from '../views/PrRed/index';
+import SoCube from '../views/SoCube/index';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/prRed',
     name: 'ProjectRed',
     component: PrRed,
+  },
+  {
+    path: '/SoCube',
+    name: 'SocialCube',
+    component: SoCube,
   },
 ];
 

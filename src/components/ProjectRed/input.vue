@@ -28,6 +28,7 @@ export default {
     border: 16px solid transparent;
     border-right: 18px solid darkred;
   }
+
   .input-left::after {
     border-right: 17px solid white;
     bottom: -1px;
@@ -42,6 +43,7 @@ export default {
     border: 16px solid transparent;
     border-left: 18px solid darkred;
   }
+
   .input-right::after {
     border-left: 17px solid white;
     bottom: -1px;
