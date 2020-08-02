@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <div class="home__element" v-for="el in elements">
-      <router-link :to="el.src">{{ el.title }}</router-link>
+    <div class="home__elements">
+      <div class="home__element" v-for="prj in projects">
+        <router-link :to="prj.url">{{ prj.title }}</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -9,26 +11,53 @@
 <script>
 export default {
   name: 'Home',
-  components: {
-
-  },
   data() {
     return {
-      elements: {
-        first: {
-          title: 'TrHeader',
-          src: '/trHeader'
+      projects: {
+        header: {
+          title: 'Triangle Header',
+          url: '/header'
         },
-        second: {
+        red: {
           title: 'Project red',
-          src: '/prRed'
+          url: '/red'
         },
-        thread: {
+        cube: {
           title: 'Social cube',
-          src: '/soCube'
+          url: '/cube'
+        },
+        svg: {
+          title: 'Dinamic SVG',
+          url: '/cube'
         }
       }
     };
   },
 };
 </script>
+
+<style lang="sass">
+  .home
+    background: #4b426d
+
+    .home__elements
+      display: grid
+      height: 100vh
+      grid-template-columns: 1fr 1fr 1fr 1fr
+
+      .home__element
+        display: flex
+
+        a
+          margin: auto
+          color: #aac1d3
+          text-decoration: none
+          font-size: 20px
+          background: #787bae
+          padding: 30px 50px
+          transition: .5s
+
+          &:hover
+            transform: translateY(-15px)
+
+</style>

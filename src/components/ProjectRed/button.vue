@@ -6,29 +6,31 @@
 
 <script>
 export default {
-name: "button"
+  name: "button"
 }
 </script>
 
-<style scoped>
-  .btn {
-    text-align: center;
-    width: 20px;
-    height: 20px;
-    background: white;
-    border: 5px solid darkred;
+<style lang="sass">
+  $color: darkred
+  $back: white
 
-    transform: rotateZ(45deg);
+  .btn
+    width: 20px
+    height: 20px
+    text-align: center
+    background: $back
+    border: 5px solid $color
 
-    color: darkred;
-    font-size: 15px;
-    font-weight: 900;
-    animation-duration: inherit;
-    transition: .3s;
-    cursor: pointer;
-  }
+    color: $color
+    font-size: 15px
+    font-weight: 900
+    cursor: pointer
 
-  .btn:hover {
-    transform: rotateZ(135deg);
-  }
+    transition: .3s
+    transform: rotateZ(45deg)
+    animation-duration: inherit
+
+    &:hover
+      transform: rotateZ(135deg)
+
 </style>

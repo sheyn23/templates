@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import TrHeader from '../views/TriangleHeader/index';
-import PrRed from '../views/PrRed/index';
-import SoCube from '../views/SoCube/index';
+import TriangleHeader from '../views/TriangleHeader/index';
+import ProjectRed from '../views/ProjectRed/index';
+import SocialCube from '../views/SocialCube/index';
 
 Vue.use(VueRouter);
 
@@ -14,19 +14,19 @@ const routes = [
     component: Home,
   },
   {
-    path: '/trHeader',
+    path: '/header',
     name: 'TriangleHeader',
-    component: TrHeader,
+    component: TriangleHeader,
   },
   {
-    path: '/prRed',
+    path: '/red',
     name: 'ProjectRed',
-    component: PrRed,
+    component: ProjectRed,
   },
   {
-    path: '/SoCube',
+    path: '/cube',
     name: 'SocialCube',
-    component: SoCube,
+    component: SocialCube,
   },
 ];
 

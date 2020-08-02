@@ -4,13 +4,11 @@
   </div>
 </template>
 
-<style >
-* {
-  margin: 0;
-  padding: 0;
-}
+<style lang="sass">
+*
+  margin: 0
+  padding: 0
 
-#app {
-  color: #2c3e50;
-}
+#app
+  font-family: sans-serif
 </style>

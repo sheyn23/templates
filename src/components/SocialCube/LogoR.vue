@@ -17,18 +17,17 @@
 
 <script>
 export default {
+  name: "LogoR",
   props: {
     color: {
       type: String,
       default: '#FFFFFF',
     }
-  },
-  name: "LogoR"
+  }
 }
 </script>
 
-<style scoped>
-  .logo-r {
-    margin: auto;
-  }
+<style lang="sass">
+  .logo-r
+    margin: auto
 </style>
