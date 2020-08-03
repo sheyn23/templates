@@ -13,14 +13,16 @@ export default {
 </script>
 
 <style lang="sass">
+  $inputHeight: 22px
   $borderWidth: 1px
+  $after: ($borderWidth * 2 + $inputHeight) / 2
   $borderColor: darkred
   $innerColor: white
 
   .input
     background: $innerColor
     border: $borderWidth solid $borderColor
-    height: 30px
+    height: $inputHeight
     width: 150px
     position: relative
 
@@ -28,32 +30,32 @@ export default {
       &::before, &::after
         content: ''
         position: absolute
-        left: -35px
+        left: (-$inputHeight - 5px)
         bottom: -1px
-        border: 16px solid transparent
-        border-right: 18px solid $borderColor
+        border: $after solid transparent
+        border-right: $after+2 solid $borderColor
 
       &::after
-        border-right: 17px solid $innerColor
+        border-right: $after+1 solid $innerColor
         bottom: -1px
-        left: -33px
+        left: (-$inputHeight - 3px)
 
 
     .input__right
       &::before, &::after
         content: ''
         position: absolute
-        right: -35px
+        right: (-$inputHeight - 5px)
         bottom: -1px
-        border: 16px solid transparent
-        border-left: 18px solid $borderColor
+        border: $after solid transparent
+        border-left: $after+2 solid $borderColor
 
 
     .input__right
       &::after
-        border-left: 17px solid $innerColor
+        border-left: $after+1 solid $innerColor
         bottom: -1px
-        right: -33px
+        right: (-$inputHeight - 3px)
 
 
     input
