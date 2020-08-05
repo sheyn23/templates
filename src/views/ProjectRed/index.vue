@@ -3,7 +3,7 @@
     <back />
     <div class="form">
       <red-btn>+</red-btn>
-      <red-input />
+      <red-input :text="'testBTN'"/>
     </div>
   </div>
 </template>

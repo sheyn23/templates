@@ -1,14 +1,20 @@
 <template>
   <div class="input">
     <div class="input__left"></div>
-    <input type="text" placeholder="text">
+    <span v-if="text">{{ text }}</span>
+    <input v-else type="text" placeholder="text">
     <div class="input__right"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "input"
+  props: {
+    text: {
+      type: String
+    }
+  },
+  name: "input",
 }
 </script>
 
@@ -18,7 +24,7 @@ export default {
   $borderWidth: 6px // Нечетные
   $borderColor: darkred
   $innerColor: white
-  $bordercount: $inputHeight/2 + $borderWidth
+  $borderSize: $inputHeight/2 + $borderWidth
 
   .input
     background: $innerColor
@@ -41,8 +47,8 @@ export default {
         position: absolute
         bottom: -$borderWidth
         left: (-$inputHeight - $borderWidth*3)
-        border: $bordercount solid transparent
-        border-right: $bordercount solid $borderColor
+        border: $borderSize solid transparent
+        border-right: $borderSize solid $borderColor
 
     .input__right
       &::after
@@ -58,8 +64,8 @@ export default {
         position: absolute
         bottom: -$borderWidth
         right: (-$inputHeight - $borderWidth*3)
-        border: $bordercount solid transparent
-        border-left: $bordercount solid $borderColor
+        border: $borderSize solid transparent
+        border-left: $borderSize solid $borderColor
 
     input
       border: none
