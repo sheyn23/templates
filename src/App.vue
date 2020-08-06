@@ -11,4 +11,5 @@
 
 #app
   font-family: sans-serif
+  background: #4b426d
 </style>
