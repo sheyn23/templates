@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import TriangleHeader from '../views/TriangleHeader/index';
 import ProjectRed from '../views/ProjectRed/index';
 import SocialCube from '../views/SocialCube/index';
+import SvgMap from '../views/SvgMap/index';
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/cube',
     name: 'SocialCube',
     component: SocialCube,
+  },
+  {
+    path: '/map',
+    name: 'SvgMap',
+    component: SvgMap,
   },
 ];
 

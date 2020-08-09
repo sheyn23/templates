@@ -37,16 +37,14 @@ export default {
         },
         svg: {
           id: 3,
-          title: 'Dinamic SVG',
-          url: '/cube'
+          title: 'SVG map',
+          url: '/map'
         }
       }
     };
   },
   methods: {
-    route(url) {
-      this.$router.push(url)
-    }
+
   }
 };
 </script>
