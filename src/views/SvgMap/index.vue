@@ -6,7 +6,9 @@
           <path v-for="reg in regions"
                 :key="reg.id"
                 :d="reg.d"
-                fill="rgb(238,128,82)"
+                class="region"
+                ref="regions"
+                fill="#404040"
                 stroke="white"
                 stroke-width="1"
                 @mouseenter="enter(reg.id)"
@@ -625,9 +627,11 @@ export default {
   },
   methods: {
     enter(n) {
+      this.$refs.regions[n].style.fill = 'rgb(238,152,109)'
       this.$refs.labels[n].style.display = 'block'
     },
     leave(n) {
+      this.$refs.regions[n].style.fill = '#404040'
       this.$refs.labels[n].style.display = 'none'
     }
   }
@@ -643,6 +647,10 @@ export default {
 
   .svg-map__row
     margin: auto
+
+    .region
+      transition: 1s
+      transform-origin: center center
 
     .label
       display: none
