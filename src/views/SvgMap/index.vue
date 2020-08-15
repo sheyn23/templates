@@ -1,8 +1,28 @@
 <template>
   <div class="svg-map">
+    <transition name="side">
+      <div class="svg-map__side-bar" v-if="getRegion">
+        <div class="side-bar__header">
+          <span v-if="getRegion.name"> {{ getRegion.name }} </span>
+          <div class="side-bar__cross" @click="closeRegion">
+            <svg height="100%" viewBox="0 0 365.71733 365" width="100%">
+              <g fill="#fff">
+                <path
+                  d="m356.339844 296.347656-286.613282-286.613281c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503906-12.5 32.769532 0 45.25l286.613281 286.613282c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082032c12.523438-12.480468 12.523438-32.75.019532-45.25zm0 0"/>
+                <path
+                  d="m295.988281 9.734375-286.613281 286.613281c-12.5 12.5-12.5 32.769532 0 45.25l15.082031 15.082032c12.503907 12.5 32.769531 12.5 45.25 0l286.632813-286.59375c12.503906-12.5 12.503906-32.765626 0-45.246094l-15.082032-15.082032c-12.5-12.523437-32.765624-12.523437-45.269531-.023437zm0 0"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="side-bar__info">
+          <p></p>
+        </div>
+      </div>
+    </transition>
     <div class="svg-map__row">
-      <svg width="980" height="572" style="display: block; touch-action: none; background: #303030">
-        <g transform="matrix(1.4401175606171932,0,0,1.4401175606171932,0,8)">
+      <svg width="980" height="572">
+        <g transform="matrix(1.4,0,0,1.4,0,8)">
           <path v-for="reg in regions"
                 :key="reg.id"
                 :d="reg.d"
@@ -11,8 +31,21 @@
                 fill="#404040"
                 stroke="white"
                 stroke-width="1"
+                @click="regionInfo(reg)"
                 @mouseenter="enter(reg.id)"
                 @mouseleave="leave(reg.id)"></path>
+          <path v-if="getRegion"
+                :d='getRegion.d'
+                fill="#EA7E48"></path>
+          <text v-if="getRegion"
+                :x="getRegion.x"
+                :y="getRegion.y"
+                dominant-baseline="middle"
+                text-anchor="middle"
+                fill="white"
+                font-size="10"
+                font-weight="bold">{{ getRegion.name }}
+          </text>
           <text v-for="reg in regions"
                 :x="reg.x"
                 :y="reg.y"
@@ -21,7 +54,8 @@
                 text-anchor="middle"
                 class="label"
                 fill="white"
-                font-size="8">{{ reg.name }}</text>
+                font-size="8">{{ reg.name }}
+          </text>
         </g>
       </svg>
     </div>
@@ -29,6 +63,8 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
+
 export default {
   name: "SvgMap",
   data() {
@@ -625,14 +661,26 @@ export default {
       },
     }
   },
+  computed: {
+    ...mapGetters('region', [
+      'getRegion'
+    ]),
+  },
   methods: {
+    ...mapActions('region', [
+      'setRegion',
+      'closeRegion'
+    ]),
     enter(n) {
-      this.$refs.regions[n].style.fill = 'rgb(238,152,109)'
+      this.$refs.regions[n].style.fill = '#ee986d'
       this.$refs.labels[n].style.display = 'block'
     },
     leave(n) {
       this.$refs.regions[n].style.fill = '#404040'
       this.$refs.labels[n].style.display = 'none'
+    },
+    regionInfo(region) {
+      this.setRegion(region)
     }
   }
 }
@@ -640,19 +688,59 @@ export default {
 
 <style lang="sass">
 .svg-map
+  color: #fff
   width: 100vw
   height: 100vh
   background: #303030
   display: flex
+  position: relative
 
   .svg-map__row
     margin: auto
 
     .region
       transition: 1s
-      transform-origin: center center
+      cursor: pointer
 
     .label
       display: none
       font: bold 10px sans-serif
+
+  .svg-map__side-bar
+    background: #404040
+    height: 100%
+    width: 250px
+
+    .side-bar__header
+      position: relative
+      width: 100%
+      background: #ee986d
+      display: flex
+      height: 50px
+
+      & span
+        text-align: center
+        margin: auto
+        font: bold 18px sans-serif
+
+      & .side-bar__cross
+        cursor: pointer
+        width: 30px
+        height: 30px
+        padding: 10px
+        background: #ee986d
+        position: absolute
+        top: 0
+        right: -50px
+
+        &:hover
+          background: #EA7E48
+
+  .side
+    &-enter-active, &-leave-active
+      transition: transform .5s
+
+    &-enter, &-leave-to
+      transform: translateX(-300px)
+
 </style>
