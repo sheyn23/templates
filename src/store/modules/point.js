@@ -11,7 +11,6 @@ const getters = {
 const mutations = {
   setTitle: (state, title) => {
     state.point[0].title = title;
-    console.log(state)
   },
   setPosition: (state, pos) => {
     state.point.push(pos);

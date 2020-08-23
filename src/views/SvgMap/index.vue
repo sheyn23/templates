@@ -6,7 +6,7 @@
           <span v-if="getRegion.name"> {{ getRegion.name }} </span>
           <div class="side-bar__cross" @click="closeRegion">
             <svg height="100%" viewBox="0 0 365.71733 365" width="100%">
-              <g fill="#fff">
+              <g fill="#FFFFFF">
                 <path
                   d="m356.339844 296.347656-286.613282-286.613281c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503906-12.5 32.769532 0 45.25l286.613281 286.613282c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082032c12.523438-12.480468 12.523438-32.75.019532-45.25zm0 0"/>
                 <path
@@ -16,8 +16,20 @@
           </div>
         </div>
         <div class="side-bar__info">
-          <div class="side-bar__point" v-for="point in getRegion.points">
-            {{ point.title }}
+          <div class="side-bar__point" v-for="(point, index) in getRegion.points">
+            <span class="side-bar__title">{{ point.title }}</span>
+            <svg width="16" height="28"
+                 class="side-bar__trash"
+                 @click="regions[getRegion.id].points.splice(index, 1)">
+              <path class="trash-body"
+                    fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 5.082C12 4.52972 11.5523 4.082 11 4.082H2C1.44772 4.082 1 4.52972 1 5.082V18.082C1 18.6343 1.44771 19.082 2 19.082H11C11.5523 19.082 12 18.6343 12 18.082V5.082ZM2.5 5.082C2.22386 5.082 2 5.30586 2 5.582V17.582C2 17.8581 2.22386 18.082 2.5 18.082C2.77614 18.082 3 17.8581 3 17.582V5.582C3 5.30586 2.77614 5.082 2.5 5.082ZM4.5 17.082C4.22386 17.082 4 16.8581 4 16.582V6.582C4 6.30586 4.22386 6.082 4.5 6.082C4.77614 6.082 5 6.30586 5 6.582V16.582C5 16.8581 4.77614 17.082 4.5 17.082ZM6.5 7.082C6.22386 7.082 6 7.30586 6 7.582V15.582C6 15.8581 6.22386 16.082 6.5 16.082C6.77614 16.082 7 15.8581 7 15.582V7.582C7 7.30586 6.77614 7.082 6.5 7.082ZM8.5 17.082C8.22386 17.082 8 16.8581 8 16.582V6.582C8 6.30586 8.22386 6.082 8.5 6.082C8.77614 6.082 9 6.30586 9 6.582V16.582C9 16.8581 8.77614 17.082 8.5 17.082ZM10.5 5.082C10.2239 5.082 10 5.30586 10 5.582V17.582C10 17.8581 10.2239 18.082 10.5 18.082C10.7761 18.082 11 17.8581 11 17.582V5.582C11 5.30586 10.7761 5.082 10.5 5.082Z"
+                    fill="#FFFFFF"/>
+              <path class="trash-head"
+                    fill-rule="evenodd" clip-rule="evenodd"
+                    d="M1 1C1 0.447723 1.44772 0 2 0H11C11.5523 0 12 0.447723 12 1V2H12.5C12.7762 2 13 2.22385 13 2.5C13 2.77615 12.7762 3 12.5 3H11H2H0.5C0.223846 3 0 2.77615 0 2.5C0 2.22385 0.223846 2 0.5 2H1V1ZM2 2H11V1H2V2Z"
+                    fill="#FFFFFF"/>
+            </svg>
           </div>
         </div>
       </div>
@@ -78,8 +90,10 @@
           <input class="modal__input"
                  type="text"
                  placeholder="Введите название маркера"
+                 maxlength="20"
                  @input="setTitle($event.target.value)">
           <span class="modal__btn"
+
                 @click="setPoint">Добавить</span>
         </div>
       </div>
@@ -806,7 +820,7 @@ export default {
     pointPosition(e) {
       let map = this.$refs.map.getBoundingClientRect()
       this.setPosition({ x: e.clientX - map.x - 7, y: e.clientY - map.y - 21 })
-    }
+    },
   }
 }
 </script>
@@ -870,10 +884,27 @@ export default {
       overflow-y: auto
 
       & .side-bar__point
-        width: 100%
         height: 50px
         background: #505050
         margin-bottom: 20px
+        padding: 10px
+        border-radius: 5px
+        position: relative
+
+        & .side-bar__trash
+          position: absolute
+          right: 5px
+          top: 5px
+          cursor: pointer
+
+          & .trash-head
+            transform: translateY(5px)
+
+          & .trash-body
+            transform: translateY(5px)
+
+          &:hover > .trash-head
+            transform: rotate(20deg) translateY(1px) translateX(2px)
 
   & .modal
     position: absolute
@@ -921,7 +952,7 @@ export default {
         margin-top: 20px
         background: #ee986d
         padding: 10px 20px
-        border-radius: 10px
+        border-radius: 5px
         cursor: pointer
         color: #FFFFFF
 
