@@ -70,16 +70,15 @@
         </g>
       </svg>
 
-      <div class="svg-map__modal" v-if="getPoint">
-        <div class="modal__row">
-          <h2 class="modal__title">Новый маркер</h2>
-          <div class="modal__property">
-            <p class="modal__name">Название маркера:</p>
-            <input class="modal__input"
-                   type="text"
-                   placeholder="Введите название маркера"
-                   @input="setTitle($event.target.value)">
-          </div>
+      <div class="modal" v-if="getPoint" @click.self="closePoint">
+        <div class="modal__row"
+             :style="{ top: `${getPoint.y + this.$refs.map.getBoundingClientRect().y - 80}px`,
+                       left: `${getPoint.x + this.$refs.map.getBoundingClientRect().x + 25}px` }">
+          <h3 class="modal__title">Новый маркер</h3>
+          <input class="modal__input"
+                 type="text"
+                 placeholder="Введите название маркера"
+                 @input="setTitle($event.target.value)">
           <span class="modal__btn"
                 @click="setPoint">Добавить</span>
         </div>
@@ -876,34 +875,58 @@ export default {
         background: #505050
         margin-bottom: 20px
 
-  & .svg-map__modal
+  & .modal
     position: absolute
     display: flex
-    justify-content: center
     top: 0
+    bottom: 0
     left: 0
     right: 0
-    bottom: 0
     background: rgba(0, 0, 0, 0.3)
-    padding: 30px 0
     overflow-x: hidden
     overflow-y: auto
+    cursor: pointer
+    z-index: 100
 
     & .modal__row
+      position: absolute
+      border-radius: 10px
       display: flex
       align-items: center
-      flex-direction: column
-      padding: 40px
-      border-radius: 10px
-      width: 450px
+      justify-content: center
+      width: 200px
+      height: 200px
+      padding: 0 30px
       background: #FFFFFF
-      color: #303030
+      color: #404040
+      flex-direction: column
+      cursor: default
+      z-index: 300
+
+      &:after
+        content: ''
+        position: absolute
+        left: -40px
+        bottom: 80px
+        border: 20px solid transparent
+        border-right: 20px solid #FFFFFF
 
       & .modal__title
-        margin-bottom: 30px
+        margin-bottom: 20px
 
-      & .modal__property
-        width: 100%
+      & .modal__input
+        width: 200px
+
+      & .modal__btn
+        margin-top: 20px
+        background: #ee986d
+        padding: 10px 20px
+        border-radius: 10px
+        cursor: pointer
+        color: #FFFFFF
+
+        &:hover
+          background: #FFAB82
 
   .side
     &-enter-active, &-leave-active
