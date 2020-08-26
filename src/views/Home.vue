@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="home__elements">
-      <div class="element" v-for="prj in projects" @click="$router.push(prj.url)">
+      <div class="element" v-for="prj in projects"
+                           :key="prj.id"
+                           @click="$router.push(prj.url)">
         <div class="element__back">
           fsdfsdfsdfsdf
         </div>

@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="side-bar__info">
-          <div class="side-bar__point" v-for="(point, index) in getRegion.points">
+          <div class="side-bar__point" v-for="(point, index) in getRegion.points" :key="index">
             <span class="side-bar__title">{{ point.title }}</span>
             <svg width="16" height="28"
                  class="side-bar__trash"
@@ -62,6 +62,7 @@
                 font-weight="bold">{{ getRegion.name }}
           </text>
           <text v-for="reg in regions"
+                :key="reg.index"
                 :x="reg.x"
                 :y="reg.y"
                 ref="labels"
@@ -72,8 +73,9 @@
                 font-size="8">{{ reg.name }}
           </text>
         </g>
-        <g v-for="reg in regions">
+        <g v-for="reg in regions" :key="reg.index">
           <path v-for="point in reg.points"
+                :key="point.index"
                 :style="{ transform: `translate( ${point.x}px, ${point.y}px)` }"
                 fill-rule="evenodd"
                 clip-rule="evenodd"
