@@ -89,13 +89,9 @@
              :style="{ top: `${getPoint.y + this.$refs.map.getBoundingClientRect().y - 80}px`,
                        left: `${getPoint.x + this.$refs.map.getBoundingClientRect().x + 25}px` }">
           <h3 class="modal__title">Новый маркер</h3>
-          <input class="modal__input"
-                 type="text"
-                 placeholder="Введите название маркера"
-                 maxlength="20"
-                 @input="setTitle($event.target.value)">
+          <custom-input v-model="compTitle"
+                        :placeholder="'Название метки'"/>    
           <span class="modal__btn"
-
                 @click="setPoint">Добавить</span>
         </div>
       </div>
@@ -105,9 +101,13 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import customInput from './../../components/input'
 
 export default {
   name: "SvgMap",
+  components: {
+    customInput,
+  },
   data() {
     return {
       regions: {
@@ -788,21 +788,30 @@ export default {
   },
   computed: {
     ...mapGetters('region', [
-      'getRegion'
+      'getRegion',
     ]),
     ...mapGetters('point', [
-      'getPoint'
+      'getPoint',
+      'getTitle'
     ]),
+    compTitle: {
+        get () {
+            return this.getTitle;
+        },
+        set (value) {
+            this.setTitle(value);
+        }
+    },
   },
   methods: {
     ...mapActions('region', [
       'setRegion',
-      'closeRegion'
+      'closeRegion',
     ]),
     ...mapActions('point', [
       'setTitle',
       'setPosition',
-      'closePoint'
+      'closePoint',
     ]),
     enter(n) {
       this.$refs.regions[n].style.fill = '#ee986d'
@@ -813,15 +822,15 @@ export default {
       this.$refs.labels[n].style.display = 'none'
     },
     regionInfo(region) {
-      this.setRegion(region)
+      this.setRegion(region);
     },
     setPoint() {
-      this.regions[this.getRegion.id].points.push({ ...this.getPoint })
-      setTimeout(this.closePoint, 0)
+      this.regions[this.getRegion.id].points.push({ ...this.getPoint });
+      setTimeout(this.closePoint, 0);
     },
     pointPosition(e) {
-      let map = this.$refs.map.getBoundingClientRect()
-      this.setPosition({ x: e.clientX - map.x - 7, y: e.clientY - map.y - 21 })
+      let map = this.$refs.map.getBoundingClientRect();
+      this.setPosition({ x: e.clientX - map.x - 7, y: e.clientY - map.y - 21 });
     },
   }
 }

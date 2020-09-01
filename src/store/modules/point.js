@@ -6,6 +6,9 @@ const getters = {
   getPoint: (state) => {
     return state.point[0] ? state.point[0] : null
   },
+  getTitle: (state) => {
+    return state.point[0].title
+  },
 };
 
 const mutations = {
