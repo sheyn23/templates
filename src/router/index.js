@@ -5,6 +5,7 @@ import TriangleHeader from '../views/TriangleHeader/index';
 import ProjectRed from '../views/ProjectRed/index';
 import SocialCube from '../views/SocialCube/index';
 import SvgMap from '../views/SvgMap/index';
+import Tabs from '../views/Tabs/index';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/map',
     name: 'SvgMap',
     component: SvgMap,
+  },
+  {
+    path: '/tabs',
+    name: 'Tabs',
+    component: Tabs,
   },
 ];
 

@@ -2,7 +2,7 @@
   <div class="home">
     <div class="home__elements">
       <div class="element" v-for="prj in projects"
-                           :key="prj.id"
+                           :key="prj.index"
                            @click="$router.push(prj.url)">
         <div class="element__back">
           fsdfsdfsdfsdf
@@ -23,25 +23,25 @@ export default {
     return {
       projects: {
         header: {
-          id: 0,
           title: 'Triangle Header',
           url: '/header'
         },
         red: {
-          id: 1,
           title: 'Project red',
           url: '/red'
         },
         cube: {
-          id: 2,
           title: 'Social cube',
           url: '/cube'
         },
         svg: {
-          id: 3,
           title: 'SVG map',
           url: '/map'
-        }
+        },
+        tabs: {
+          title: 'Tabs',
+          url: '/tabs'
+        },
       }
     };
   },
