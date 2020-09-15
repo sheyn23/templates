@@ -1,25 +1,35 @@
 <template>
-  <div class="tabs-container">
-    <div class="tabs-row">
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" v-for="block in blocks" :key="block.index">
-            <line   v-for="line in block" 
-                    :key="line.index"
-                    :y1="line.y" x2="300" :y2="line.y" stroke="#ACACAC" stroke-width="2">
-            </line>
-            <g v-for="line in block" :key="line.index">
-                <text   v-for="point in line.points"
-                        :key="point.index"
-                        :x="point.x"
-                        :y="line.y"
-                        dominant-baseline="middle"
-                        text-anchor="middle"
-                        class="label"
-                        fill="black"
-                        font-size="14">6</text>
-            </g>
-        </svg>
+    <div class="tabs-container">
+        <div class="tabs-row">
+            <svg fill="none" v-for="(block, bIndex) in blocks" :key="bIndex" ref="blocks">
+                <g  v-for="(line, lIndex) in block" 
+                    :key="lIndex"
+                    @click="addPoint(bIndex, lIndex, $event)"
+                    @mouseenter="lightUp(bIndex, lIndex)"
+                    @mouseleave="lightDown(bIndex, lIndex)">
+                    <rect :y="line.y - 8" width="300" height="16" fill="#FFEE53" fill-opacity="0" ref="rects"/>
+                    <line   
+                            :y1="line.y" x2="300"
+                            :y2="line.y"
+                            ref="lines"
+                            stroke="#ACACAC"
+                            stroke-width="2">
+                    </line>
+                </g>
+                <g v-for="line in block" :key="line.index">
+                    <text   v-for="point in line.points"
+                            :key="point.index"
+                            :x="point.x"
+                            :y="line.y"
+                            dominant-baseline="middle"
+                            text-anchor="middle"
+                            class="label"
+                            fill="black"
+                            font-size="14">{{ point.title }}</text>
+                </g>
+            </svg>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -30,117 +40,70 @@ export default {
                 [
                     {
                         y: '17',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        points: []
                     },
                     {
                         y: '33',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        points: []
                     },
                     {
-                        y: '50',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        y: '49',
+                        points: []
                     },
                     {
-                        y: '67',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        y: '65',
+                        points: []
                     },
                     {
-                        y: '83',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        y: '81',
+                        points: []
                     },
                     {
-                        y: '100',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        y: '97',
+                        points: []
                     },
                 ],
                 [
                     {
                         y: '17',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        points: []
                     },
                     {
                         y: '33',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        points: []
                     },
                     {
-                        y: '50',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        y: '49',
+                        points: []
                     },
                     {
-                        y: '67',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        y: '65',
+                        points: []
                     },
                     {
-                        y: '83',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        y: '81',
+                        points: []
                     },
                     {
-                        y: '100',
-                        points: [
-                            {
-                                x: '20',
-                                title: '6'
-                            }
-                        ]
+                        y: '97',
+                        points: []
                     },
                 ],
             ]
         }
+    },
+    methods: {
+        addPoint(block, line, e) {
+            let pointX = e.clientX - this.$refs.blocks[block].children[line].getBoundingClientRect().x;
+            this.blocks[block][line].points.push({x: pointX, title: '3'});
+        },
+        lightUp(bIndex, lIndex) {
+            console.log(this.$refs.blocks[bIndex]);;
+        },
+        lightDown(bIndex, lIndex) {
+            // this.$refs.rects[lIndex].style.fillOpacity = '0';
+        },
+        
     }
 }
 </script>
@@ -155,9 +118,9 @@ export default {
         max-width: 1000px
         padding: 20px
         margin: auto
-        display: flex;
+        display: flex
         justify-content: center
-        flex-wrap: wrap;
+        flex-wrap: wrap
 
 
 </style>
