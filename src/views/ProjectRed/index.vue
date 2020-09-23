@@ -11,7 +11,7 @@
 <script>
 import RedBtn from '@/components/ProjectRed/button'
 import RedInput from '@/components/ProjectRed/input'
-import Back from "@/components/BackToHome";
+import Back from "@/components/backToHome";
 
 export default {
   name: "ProjectRed",

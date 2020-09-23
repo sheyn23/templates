@@ -1,8 +1,19 @@
 <template>
   <div id="app">
     <RouterView/>
+    <modal />
   </div>
 </template>
+
+<script>
+import modal from './components/modal'
+
+export default {
+    components: {
+        modal
+    }
+}
+</script>
 
 <style lang="sass">
 *

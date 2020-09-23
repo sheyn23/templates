@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Back from "@/components/BackToHome";
+import Back from "@/components/backToHome";
 
 export default {
   name: 'TriangleHeader',

@@ -19,7 +19,7 @@
 <script>
 import LogoR from "@/components/SocialCube/LogoR";
 import SocialMedia from "@/components/SocialCube/SocialMedia";
-import Back from "@/components/BackToHome";
+import Back from "@/components/backToHome";
 
 export default {
   name: "SocialCube",

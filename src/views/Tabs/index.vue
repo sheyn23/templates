@@ -43,12 +43,6 @@
                             font-size="14">{{ point.title }}</text>
                 </g>
             </svg>
-            <div class="tabs__modal" v-if="" @click.self="closeNote">
-                <div class="tabs__modal-container">
-                    <input class="tabs__input" type="text">
-                    <!-- <span class="tabs__btn" @click="addPoint()">Add</span> -->
-                </div>
-            </div>
         </div>
         <span class="tabs__btn" @click="addBlock()">+</span>
     </div>
@@ -56,65 +50,33 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import Note from './../../components/Tabs/Note';
 
 export default {
     data() {
         return {
             blocks: [
                 [
-                    {
-                        y: '25',
-                        points: []
-                    },
-                    {
-                        y: '41',
-                        points: []
-                    },
-                    {
-                        y: '57',
-                        points: []
-                    },
-                    {
-                        y: '73',
-                        points: []
-                    },
-                    {
-                        y: '89',
-                        points: []
-                    },
-                    {
-                        y: '105',
-                        points: []
-                    },
+                    { y: '25', points: [] },
+                    { y: '41', points: [] },
+                    { y: '57', points: [] },
+                    { y: '73', points: [] },
+                    { y: '89', points: [] },
+                    { y: '105', points: [] },
                 ],
                 [
-                    {
-                        y: '25',
-                        points: []
-                    },
-                    {
-                        y: '41',
-                        points: []
-                    },
-                    {
-                        y: '57',
-                        points: []
-                    },
-                    {
-                        y: '73',
-                        points: []
-                    },
-                    {
-                        y: '89',
-                        points: []
-                    },
-                    {
-                        y: '105',
-                        points: []
-                    },
-                ],
+                    { y: '25', points: [] },
+                    { y: '41', points: [] },
+                    { y: '57', points: [] },
+                    { y: '73', points: [] },
+                    { y: '89', points: [] },
+                    { y: '105', points: [] },
+                ]
             ]
         }
+    },
+    components: {
+        Note,
     },
     actions: {
         ...mapGetters('note', [
@@ -127,10 +89,23 @@ export default {
             'setNoteTitle',
             'closeNote',
         ]),
+        ...mapActions('modal', [
+            'newModal',
+        ]),
         addPoint(block, line, e) {
-            let pointX = e.clientX - this.$refs.blocks[block].children[line]
-            .getBoundingClientRect().x;
-            this.blocks[block][line].points.push({x: pointX, title: '3'});
+            console.log(e);
+            // let pointX = e.clientX - this.$refs.blocks[block].children[line]
+            // .getBoundingClientRect().x;
+            // this.blocks[block][line].points.push({x: pointX, title: '3'});
+            this.newModal({
+                component: 'Note',
+                data: {
+                    x: e.clientX,
+                    y: e.clientY,
+                    block: block,
+                    line: line,
+                },
+            })
         },
         addBlock() {
             this.blocks.push([
@@ -171,38 +146,6 @@ export default {
 
             &:hover
                 fill-opacity: 0.4
-
-        .tabs__modal
-            position: absolute
-            top: 0
-            bottom: 0
-            left: 0
-            right: 0
-            background: rgba(0, 0, 0, 0.4)
-
-            & .tabs__modal-container
-                width: 50px
-                background: #FFFFFF
-                padding: 10px
-                display: flex
-                flex-direction: column
-                align-items: center
-                border-radius: 5px
-
-                & .tabs__input
-                    width: 20px
-                    height: 20px
-                    border: 1px solid black
-                    border-radius: 5px
-                    padding: 0 5px
-                    text-align: center
-
-                    &:focus
-                        border-color: #AED4E6
-
-                & .tabs__btn
-                    margin: 5px 0 0 0
-
 
     .tabs__btn         
         padding: 6px 10px
