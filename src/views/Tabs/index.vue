@@ -2,7 +2,7 @@
     <div class="tabs">
         <div class="tabs__row">
             <svg height="116"
-                 v-for="(block, bIndex) in blocks"
+                 v-for="(block, bIndex) in getBlocks"
                  :key="bIndex"
                  ref="blocks">
                 <line y2="116" stroke="#AED4E6"
@@ -44,59 +44,33 @@
                 </g>
             </svg>
         </div>
-        <span class="tabs__btn" @click="addBlock()">+</span>
+        <span class="tabs__btn" @click="setBlock">+</span>
     </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import Note from './../../components/Tabs/Note';
 
 export default {
+    name: "Tabs",
     data() {
         return {
-            blocks: [
-                [
-                    { y: '25', points: [] },
-                    { y: '41', points: [] },
-                    { y: '57', points: [] },
-                    { y: '73', points: [] },
-                    { y: '89', points: [] },
-                    { y: '105', points: [] },
-                ],
-                [
-                    { y: '25', points: [] },
-                    { y: '41', points: [] },
-                    { y: '57', points: [] },
-                    { y: '73', points: [] },
-                    { y: '89', points: [] },
-                    { y: '105', points: [] },
-                ]
-            ]
+        
         }
     },
-    components: {
-        Note,
-    },
-    actions: {
+    computed: {
         ...mapGetters('note', [
-            'getNote',
-            'getNoteTitle'
+            'getBlocks',
         ]),
     },
     methods: {
         ...mapActions('note', [
-            'setNoteTitle',
-            'closeNote',
+            'setBlock',
         ]),
         ...mapActions('modal', [
             'newModal',
         ]),
         addPoint(block, line, e) {
-            console.log(e);
-            // let pointX = e.clientX - this.$refs.blocks[block].children[line]
-            // .getBoundingClientRect().x;
-            // this.blocks[block][line].points.push({x: pointX, title: '3'});
             this.newModal({
                 component: 'Note',
                 data: {
@@ -104,18 +78,9 @@ export default {
                     y: e.clientY,
                     block: block,
                     line: line,
+                    pointX: e.clientX - this.$refs.blocks[block].children[line].getBoundingClientRect().x
                 },
             })
-        },
-        addBlock() {
-            this.blocks.push([
-                    { y: '25', points: [] },
-                    { y: '41', points: [] },
-                    { y: '57', points: [] },
-                    { y: '73', points: [] },
-                    { y: '89', points: [] },
-                    { y: '105', points: [] },
-                ]);
         },
     }
 }

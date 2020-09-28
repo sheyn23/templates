@@ -1,31 +1,52 @@
 const state = {
-    note: []
+    blocks: [
+        [
+            { y: '25', points: [] },
+            { y: '41', points: [] },
+            { y: '57', points: [] },
+            { y: '73', points: [] },
+            { y: '89', points: [] },
+            { y: '105', points: [] },
+        ],
+        [
+            { y: '25', points: [] },
+            { y: '41', points: [] },
+            { y: '57', points: [] },
+            { y: '73', points: [] },
+            { y: '89', points: [] },
+            { y: '105', points: [] },
+        ]
+    ]
 };
 
 const getters = {
-    getNote: (state) => {
-        return state.note[0] ? state.note[0] : null
-    },
-    getNoteTitle: (state) => {
-        return state.note[0].title
+    getBlocks: (state) => {
+        return state.blocks
     },
 };
 
 const mutations = {
-    setNoteTitle: (state, title) => {
-        state.note[0].title = title;
+    setBlock: (state) => {
+        state.blocks.push([
+            { y: '25', points: [] },
+            { y: '41', points: [] },
+            { y: '57', points: [] },
+            { y: '73', points: [] },
+            { y: '89', points: [] },
+            { y: '105', points: [] },
+        ])
     },
-    closeNote: (state) => {
-        state.note = [];
+    setPoint: (state, point) => {
+        state.blocks[point.block][point.line].points.push({ title: point.title, x: point.x })
     },
 };
 
 const actions = {
-    setNoteTitle({ commit, state }, title) {
-        commit('setNoteTitle', title);
+    setBlock({ commit, state }) {
+        commit('setBlock');
     },
-    closeNote({ commit, state }) {
-        commit('closeNote');
+    setPoint({ commit, state }, point) {
+        commit('setPoint', point);
     },
 };
 

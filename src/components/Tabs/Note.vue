@@ -1,20 +1,40 @@
 <template>
     <div class="note">
-        <input class="note__input" type="text">
-        <span class="note__btn">Add</span>
+        <input class="note__input" type="text" v-model="title">
+        <span class="note__btn" @click="addPoint">Add</span>
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     name: "Note",
-    // props: {
-    //     data: {
-    //         type: Object,
-    //     },
-    // },
+    props: {
+        point: {
+            type: Object,
+            default: {}
+        }
+    },
+    data: () => ({
+        title: null,
+    }),
     methods: {
-
+        ...mapActions('note', [
+            'setPoint',
+        ]),
+        ...mapActions('modal',[
+            'closeModal'
+        ]),
+        addPoint() {
+            console.log(this.point);
+            this.setPoint({
+                block: this.point.block,
+                line: this.point.line,
+                title: this.title,
+                x: this.point.pointX
+            }).then(this.closeModal);
+        }
     }
 }
 </script>

@@ -4,7 +4,7 @@
              :style="{ top: `${compPos.y}px`,
                        left: `${compPos.x}px` }">
             <component :is="getActiveModal.component"
-                       :data="getActiveModal.data"/>
+                       :point="getActiveModal.data"/>
         </div>
     </div>
 </template>
@@ -14,7 +14,7 @@ import { mapGetters, mapActions } from 'vuex';
 import Note from './../components/Tabs/Note'
 
 export default {
-    name: "modal",
+    name: "Modal",
     components: {
         Note,
     },
@@ -27,6 +27,7 @@ export default {
             'getActiveModal',
         ]),
         compPos() {
+            console.log(this.getActiveModal.data);
             let x, y;
             switch (this.getActiveModal.component) {
                 case 'Note':
@@ -52,7 +53,7 @@ export default {
         ...mapActions('modal',[
             'closeModal'
         ]),
-    }
+    },
 }
 </script>
 
