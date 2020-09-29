@@ -39,6 +39,10 @@ const mutations = {
     setPoint: (state, point) => {
         state.blocks[point.block][point.line].points.push({ title: point.title, x: point.x })
     },
+    remPoint: (state, point) => {
+        console.log('test', state.blocks[point.block][point.line].points);
+        state.blocks[point.block][point.line].points.splice(point.index, 1)
+    },
 };
 
 const actions = {
@@ -47,6 +51,9 @@ const actions = {
     },
     setPoint({ commit, state }, point) {
         commit('setPoint', point);
+    },
+    remPoint({ commit, state }, point) {
+        commit('remPoint', point);
     },
 };
 

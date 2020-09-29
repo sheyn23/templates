@@ -15,7 +15,7 @@
                       >{{ bIndex + 1 }}</text>
                 <g  v-for="(line, lIndex) in block" 
                     :key="lIndex"
-                    @click="addPoint(bIndex, lIndex, $event)">
+                    >
                     <line   
                             :y1="line.y" x2="300"
                             :y2="line.y"
@@ -23,24 +23,31 @@
                             stroke="#ACACAC"
                             stroke-width="2" 
                             class="line"/>
-                    <rect :y="line.y - 8"
+                    <rect  @click="addPoint(bIndex, lIndex, $event)"
+                           :y="line.y - 8"
                            width="300"
                            height="16"
                            fill="#FFEE53"
                            fill-opacity="0.4"
                            ref="rects"
                            class="line-background"/>
-                </g>
-                <g v-for="line in block" :key="line.index">
-                    <text   v-for="point in line.points"
-                            :key="point.index"
-                            :x="point.x"
-                            :y="line.y"
-                            dominant-baseline="middle"
-                            text-anchor="middle"
-                            class="label"
-                            fill="black"
-                            font-size="14">{{ point.title }}</text>
+                    <g v-for="(point, pIndex) in line.points"
+                       :key="pIndex"
+                       @click="remPoint({
+                                    block: bIndex,
+                                    line: lIndex,
+                                    index: pIndex})">
+                        <rect width="18" height="16" fill="white"
+                              :x="point.x - 9" :y="line.y - 8"/>
+                        <text   dominant-baseline="middle"
+                                text-anchor="middle"
+                                class="label"
+                                fill="black"
+                                :x="point.x" :y="line.y"
+                                font-size="14"
+                                
+                                    >{{ point.title }}</text>
+                    </g>
                 </g>
             </svg>
         </div>
@@ -66,6 +73,7 @@ export default {
     methods: {
         ...mapActions('note', [
             'setBlock',
+            'remPoint'
         ]),
         ...mapActions('modal', [
             'newModal',

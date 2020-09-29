@@ -27,7 +27,6 @@ export default {
             'getActiveModal',
         ]),
         compPos() {
-            console.log(this.getActiveModal.data);
             let x, y;
             switch (this.getActiveModal.component) {
                 case 'Note':
